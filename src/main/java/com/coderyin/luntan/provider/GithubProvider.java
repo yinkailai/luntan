@@ -5,7 +5,6 @@ import com.coderyin.luntan.dto.AccessTokenDTO;
 import com.coderyin.luntan.dto.GithubUser;
 import okhttp3.*;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.io.IOException;
 
@@ -16,23 +15,18 @@ public class GithubProvider {
 
         MediaType mediaType = MediaType.get("application/json; charset=utf-8");
         OkHttpClient client = new OkHttpClient();
-        RequestBody body = RequestBody.create(JSON.toJSONString(accessTokenDTO), mediaType);
+        RequestBody body = RequestBody.create(JSON.toJSONString(accessTokenDTO),mediaType);
         Request request = new Request.Builder()
-                .url("https://github.com/login/oauth/access_token")  //github接口地址
+                .url("https://github.com/login/oauth/access_token")
                 .post(body)
                 .build();
         try (Response response = client.newCall(request).execute()) {
-            //获取到token信息
-            String token = response.body().string();
-            //截取token关键信息返回
-            String s = token.split("&")[0].split("=")[1];
-            System.out.println(token);
-            System.out.println(s);
-            return s;
-        } catch (IOException e) {
+            String string = response.body().string();
+            String token = string.split("&")[0].split("=")[1];
+            return token;
+        } catch (Exception e) {
             e.printStackTrace();
         }
-
         return null;
     }
 
@@ -42,7 +36,7 @@ public class GithubProvider {
         OkHttpClient client = new OkHttpClient();
 
         Request request = new Request.Builder()
-                .url("https://api.github.com/user") //github接口地址
+                .url("https://api.github.com/user?access_token=" + token) //github接口地址
                 .build();
 
         try (Response response = client.newCall(request).execute()) {
@@ -51,8 +45,7 @@ public class GithubProvider {
             //转成Githubuser类型返回回去
             return JSON.parseObject(string,GithubUser.class);
         }catch (Exception e){
-            e.printStackTrace();
+            return null;
         }
-        return null;
     }
 }
