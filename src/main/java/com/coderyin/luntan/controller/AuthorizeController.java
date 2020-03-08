@@ -24,15 +24,14 @@ public class AuthorizeController {
     public String authorize(@RequestParam(name="code") String code,
                             @RequestParam(name="state") String state) {
         AccessTokenDTO accessTokenDTO = new AccessTokenDTO();
-        accessTokenDTO.setClient_id("clientId");
-        accessTokenDTO.setClient_secret("clientSecret");
+        accessTokenDTO.setClient_id(clientId);
+        accessTokenDTO.setClient_secret(clientSecret);
         accessTokenDTO.setCode(code);
-        accessTokenDTO.setDirect_uri("dreUri");
+        accessTokenDTO.setDirect_uri(dreUri);
         accessTokenDTO.setStatus(state);
 
         String token = githubProvider.getToken(accessTokenDTO);
         GithubUser user = githubProvider.getuser(token);
-        System.out.println(user);
         return "index";
     }
 }
