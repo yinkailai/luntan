@@ -5,6 +5,7 @@ public class User {
     private String name;
     private String accountId;
     private String token;
+    private String bio;
     private Long createDate;
     private Long updateDate;
 
@@ -55,4 +56,14 @@ public class User {
     public void setUpdateDate(Long updateDate) {
         this.updateDate = updateDate;
     }
+
+    public String getBio() {
+        return bio;
+    }
+
+    public void setBio(String bio) {
+        this.bio = bio;
+    }
+
+
 }
