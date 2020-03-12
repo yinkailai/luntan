@@ -53,6 +53,7 @@ public class AuthorizeController {
             user.setBio(githubUser.getBio());
             user.setCreateDate(System.currentTimeMillis());
             user.setUpdateDate(user.getCreateDate());
+            user.setAvatarUrl(githubUser.getAvatar_url());
             userMapper.insert(user);
             response.addCookie(new Cookie("tokeng",tokeng));
             return "redirect:/";

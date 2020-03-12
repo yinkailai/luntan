@@ -9,6 +9,7 @@ public class User {
     private String accountId;
     private String token;
     private String bio;
+    private String avatarUrl;
     private Long createDate;
     private Long updateDate;
 
