@@ -22,19 +22,11 @@ public class IndexController {
     private UserMapper userMapper;
     @Autowired
     private QuestionMapper questionMapper;
+
+
     @GetMapping("/")
     public String index(HttpServletResponse response, HttpServletRequest request,Model model) {
-        Cookie[] cookies = request.getCookies();
-        for (Cookie c: cookies) {
-            if (c.getName().equals("tokeng")) {
-                String token = c.getValue();
-                User user = userMapper.findByToken(token);
-                if (null != user) {
-                    request.getSession().setAttribute("user",user);
-                }
-                break;
-            }
-        }
+
         List<Question> quesList = questionMapper.findAllList();
         model.addAttribute("quesList",quesList);
         return "index";

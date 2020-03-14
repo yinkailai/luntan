@@ -27,19 +27,7 @@ public class PublishController {
     @PostMapping("/publish")
     public String save(Question question, Model model,
                         HttpServletRequest request) {
-        User user = null;
-        //判断是否登录状态
-        Cookie[] cookies = request.getCookies();
-        for (Cookie c: cookies) {
-            if (c.getName().equals("tokeng")) {
-                String token = c.getValue();
-                user = userMapper.findByToken(token);
-                if (null != user) {
-                    request.getSession().setAttribute("user",user);
-                }
-                break;
-            }
-        }
+        User user =(User) request.getSession().getAttribute("user");
 
         if (null == user) {//如果未登录
             model.addAttribute("erro","请先登录");

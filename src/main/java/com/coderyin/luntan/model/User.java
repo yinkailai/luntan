@@ -12,8 +12,4 @@ public class User {
     private String avatarUrl;
     private Long createDate;
     private Long updateDate;
-
-
-
-
 }
