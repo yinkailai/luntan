@@ -31,4 +31,22 @@ public class IndexController {
         model.addAttribute("quesList",quesList);
         return "index";
     }
+
+    /**
+     * 退出登录
+     * @param request
+     * @param response
+     * @return
+     */
+    @GetMapping("/logout")
+    public String logout(HttpServletRequest request,HttpServletResponse response) {
+        //清楚session
+        request.getSession().removeAttribute("user");
+        //清楚浏览器cookie
+        Cookie cookie = new Cookie("tokeng",null);
+        cookie.setMaxAge(0);
+        response.addCookie(cookie);
+        return "redirect:/";
+
+    }
 }

@@ -5,6 +5,7 @@ import com.coderyin.luntan.dto.GithubUser;
 import com.coderyin.luntan.mapper.UserMapper;
 import com.coderyin.luntan.model.User;
 import com.coderyin.luntan.provider.GithubProvider;
+import com.coderyin.luntan.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -24,6 +25,8 @@ public class AuthorizeController {
     private GithubProvider githubProvider;
     @Autowired
     private UserMapper userMapper;
+    @Autowired
+    private UserService userService;
     @Value("${github.client.id}")
     private String clientId;
     @Value("${github.client.secret}")
@@ -55,7 +58,8 @@ public class AuthorizeController {
             user.setCreateDate(System.currentTimeMillis());
             user.setUpdateDate(user.getCreateDate());
             user.setAvatarUrl(githubUser.getAvatar_url());
-            userMapper.insert(user);
+            //更新或新增用户
+            userService.insertOrUpdate(user);
             response.addCookie(new Cookie("tokeng",tokeng));
             return "redirect:/";
         }

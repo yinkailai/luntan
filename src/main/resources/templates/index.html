@@ -26,12 +26,26 @@
                     </a>
                 </div>
                 <div class="media-body">
-                    <h4 class="media-heading" th:text="${ent.title}"></h4>
-                    <span th:text="${ent.content}"></span>
+                    <h4 class="media-heading">
+                        <a th:href="@{'/question/'+${ent.id}}" th:text="${ent.title}"></a>
+                    </h4>
+                    作者：
+                    <span th:text="${ent.creator}"></span>
+                    发布时间：
+                    <span th:text="${#dates.format(ent.createDate,'yyyy-mm-dd HH:mm')}"></span>
+                    回复数：
+                    <span>
+                        [<a th:text="${ent.comments}"></a>]
+                    </span>
+                    阅读数：
+                    <span>
+                        [<a th:text="${ent.readCount}"></a>]
+                    </span>
                 </div>
             </div>
         </div>
-        <div class="col-lg-3 col-md-12 col-sm-12"></div>
+        <div class="col-lg-3 col-md-12 col-sm-12">
+        </div>
     </div>
 </div>
 </body>

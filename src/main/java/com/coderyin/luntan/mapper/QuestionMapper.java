@@ -4,6 +4,7 @@ import com.coderyin.luntan.model.Question;
 import com.coderyin.luntan.model.User;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
@@ -32,4 +33,12 @@ public interface QuestionMapper {
      */
     @Select("select * from question where creator = #{id}")
     List<Question> findListByUser(User user);
+
+    /**
+     * 根据id查找
+     * @param qid
+     * @return
+     */
+    @Select("select * from question where id = #{qid}")
+    Question findById(@Param("qid") Integer qid);
 }
