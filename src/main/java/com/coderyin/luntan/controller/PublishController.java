@@ -16,14 +16,27 @@ import javax.servlet.http.HttpServletRequest;
 
 @Controller
 public class PublishController {
-    @Autowired
-    private UserMapper userMapper;
+
     @Autowired
     private QuestionMapper questionMapper;
+
+    /**
+     * 前往发布页面
+     * @return
+     */
     @GetMapping("/publishIndex")
-    public String publish() {
+    public String publish(Question question,Model model) {
+        model.addAttribute("question",question);
         return "publish";
     }
+
+    /**
+     * 问题发布
+     * @param question
+     * @param model
+     * @param request
+     * @return
+     */
     @PostMapping("/publish")
     public String save(Question question, Model model,
                         HttpServletRequest request) {
@@ -37,6 +50,8 @@ public class PublishController {
         question.setCreateDate(System.currentTimeMillis());
         question.setUpdateDate(question.getCreateDate());
         questionMapper.create(question);
-        return "redirect:/";
+        model.addAttribute("erro","发布成功");
+        model.addAttribute("question",question);
+        return "publish";
     }
 }
