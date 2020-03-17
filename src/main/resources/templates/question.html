@@ -39,8 +39,8 @@
                     <span th:text="${question.content}"></span>
                 </div>
                 <hr>
-                <a href="/publishIndex">
-                    <span class="glyphicon glyphicon-pencil">编辑</span>
+                <a th:href="@{'/edit/' + ${question.id}}">
+                    <span class="glyphicon glyphicon-pencil" >编辑</span>
                 </a>
             </div>
         </div>

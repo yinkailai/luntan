@@ -2,10 +2,7 @@ package com.coderyin.luntan.mapper;
 
 import com.coderyin.luntan.model.Question;
 import com.coderyin.luntan.model.User;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -41,4 +38,8 @@ public interface QuestionMapper {
      */
     @Select("select * from question where id = #{qid}")
     Question findById(@Param("qid") Integer qid);
+
+    @Update("update question set title = #{title},content = #{content}," +
+            "tag = #{tag},create_date = #{createDate} where id =#{id}")
+    void update(Question question);
 }
