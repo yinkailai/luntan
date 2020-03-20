@@ -42,4 +42,11 @@ public interface QuestionMapper {
     @Update("update question set title = #{title},content = #{content}," +
             "tag = #{tag},create_date = #{createDate} where id =#{id}")
     void update(Question question);
+
+    /**
+     * 浏览数增长
+     * @param qid
+     */
+    @Update("update question set read_count = read_count+1 where id = #{qid}")
+    void updateIncrementRead(@Param("qid") Integer qid);
 }

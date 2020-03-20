@@ -9,6 +9,20 @@
     <script src="/js/jquery-3.4.1.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
     <script>
+        function commit() {
+            let content = $("#answer").val();
+            let question = $("#questionId").val();
+            alert(question);
+            $.ajax({
+                type:'post',
+                url:'/comments',
+                data:{
+                    content:content,
+                    question:question
+                },
+            })
+
+        }
     </script>
 </head>
 <body>
@@ -21,7 +35,6 @@
 
             <div class="media">
                 <div class="media-left">
-
                 </div>
                 <div class="media-body">
                     <h4 class="media-heading"  style="cursor: pointer"></h4>
@@ -36,13 +49,29 @@
             <hr>
             <div class="col-lg-12 col-md-12 col-sm-12 clo-xs-12">
                 <div class="col-lg-12 col-md-12 col-sm-12 clo-xs-12">
-                    <span th:text="${question.content}"></span>
+                    <div th:text="${question.content}"></div>
                 </div>
                 <hr>
                 <a th:href="@{'/edit/' + ${question.id}}">
                     <span class="glyphicon glyphicon-pencil" >编辑</span>
                 </a>
+                <hr>
             </div>
+            <!--头像/名字-->
+            <div class="media-left">
+                <img class="img-circle" style="height: 40px" src="https://i2.hdslb.com/bfs/face/393b19032f0c16fefdedcd74fbc7b6b805956dfa.jpg@40w_41h_1c_100q.webp">
+            </div>
+            <div class="media-body">
+                <span></span>
+            </div>
+            <!--回复输入框-->
+
+            <div class="col-lg-12 col-md-12 col-sm-12 clo-xs-12">
+                <input type="hidden" th:value="${question.id}" id="questionId">
+                <textarea class="form-control" rows="5" name="content" id="answer"></textarea>
+            </div>
+            <button type="button" class="btn btn-success answer_btn" onclick="commit()">回复</button>
+
         </div>
         <div class="col-lg-3 col-md-12 col-sm-12">
             <h4>发起人</h4>

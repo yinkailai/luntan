@@ -16,12 +16,19 @@ public class QusetionController {
     @Autowired
     private QuestionMapper questionMapper;
 
+    /**
+     * 查看问题
+     * @param qid
+     * @param model
+     * @return
+     */
     @GetMapping("/question/{qid}")
     public String toQuestion(@PathVariable(name = "qid") Integer qid, Model model) {
         Question question = questionMapper.findById(qid);
         if (null == question){
             throw new ErrorException(ErrorCodeImp.OBJECT_NOT_FOUND);
         }
+        questionMapper.updateIncrementRead(qid);
         model.addAttribute("question",question);
         return "question";
     }

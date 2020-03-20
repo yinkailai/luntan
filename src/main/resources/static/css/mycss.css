@@ -14,5 +14,13 @@ body{
 }
 a{
     cursor: pointer;
-    color: darkgrey;
+    color: #155faa;
+    font-size: 14px;
+}
+span {
+    color: #999;
+}
+.answer_btn {
+    float: right;
+    margin-right: 15px;
 }

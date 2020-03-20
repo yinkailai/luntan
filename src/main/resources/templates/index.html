@@ -30,18 +30,18 @@
                     <h4 class="media-heading">
                         <a th:href="@{'/question/'+${ent.id}}" th:text="${ent.title}"></a>
                     </h4>
-                    作者：
+                   <span>•
                     <span th:text="${ent.creator}"></span>
-                    发布时间：
-                    <span th:text="${#dates.format(ent.createDate,'yyyy-mm-dd HH:mm')}"></span>
-                    回复数：
+                    发布了文章•
+                    <span th:text="${#dates.format(ent.createDate,'yyyy-mm-dd HH:mm')}">
+                    </span>•
                     <span>
-                        [<a th:text="${ent.comments}"></a>]
-                    </span>
-                    阅读数：
+                        <a th:text="${ent.comments}"></a>
+                    </span>个评论•
                     <span>
-                        [<a th:text="${ent.readCount}"></a>]
-                    </span>
+                        <a th:text="${ent.readCount}"></a>
+                    </span>次浏览
+                   </span>
                 </div>
             </div>
         </div>
