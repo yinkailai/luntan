@@ -49,4 +49,11 @@ public interface QuestionMapper {
      */
     @Update("update question set read_count = read_count+1 where id = #{qid}")
     void updateIncrementRead(@Param("qid") Integer qid);
+
+    /**
+     * 评论数增长
+     * @param question
+     */
+    @Update("update question set comments = comments+1 where id = #{question}")
+    void updateIncrementComments(@Param("question") Integer question);
 }

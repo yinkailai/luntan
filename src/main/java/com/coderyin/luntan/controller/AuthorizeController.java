@@ -6,6 +6,7 @@ import com.coderyin.luntan.mapper.UserMapper;
 import com.coderyin.luntan.model.User;
 import com.coderyin.luntan.provider.GithubProvider;
 import com.coderyin.luntan.service.UserService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -19,6 +20,7 @@ import java.util.UUID;
 
 
 @Controller
+@Slf4j
 public class AuthorizeController {
 
     @Autowired
@@ -62,7 +64,10 @@ public class AuthorizeController {
             userService.insertOrUpdate(user);
             response.addCookie(new Cookie("tokeng",tokeng));
             return "redirect:/";
+        }else {
+            log.error("callback get user error,{}",githubUser);
+            return "redirect:/";
         }
-        return "index";
+
     }
 }

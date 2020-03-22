@@ -24,3 +24,17 @@ span {
     float: right;
     margin-right: 15px;
 }
+.comments span {
+    color: black;
+    font-size: 14px;
+    font-style: italic;
+}
+
+.icoc span{
+    margin-left: 10px;
+
+}
+.icoc span:hover {
+    cursor: pointer;
+    color: #999999;
+}

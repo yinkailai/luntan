@@ -17,23 +17,24 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-lg-9 col-md-12 col-sm-12">
-            <h3><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>发现</a></h3>
+            <h3 class="glyphicon glyphicon-th-list" aria-hidden="true">发现</h3>
             </hr>
 
             <div class="media" th:each="ent : ${quesList}">
-                <div class="media-left">
-                    <a>
-                        <img class="img-circle" style="height: 40px" src="https://i2.hdslb.com/bfs/face/393b19032f0c16fefdedcd74fbc7b6b805956dfa.jpg@40w_41h_1c_100q.webp">
-                    </a>
-                </div>
-                <div class="media-body">
-                    <h4 class="media-heading">
-                        <a th:href="@{'/question/'+${ent.id}}" th:text="${ent.title}"></a>
-                    </h4>
-                   <span>•
+            <div class="media-left">
+                <a>
+                    <img class="img-circle" style="height: 40px"
+                         src="https://i0.hdslb.com/bfs/archive/4de86ebf90b044bf9ba2becf042a8977062b3f99.png">
+                </a>
+            </div>
+            <div class="media-body">
+                <h4 class="media-heading">
+                    <a th:href="@{'/question/'+${ent.id}}" th:text="${ent.title}"></a>
+                </h4>
+                <span>•
                     <span th:text="${ent.creator}"></span>
                     发布了文章•
-                    <span th:text="${#dates.format(ent.createDate,'yyyy-mm-dd HH:mm')}">
+                    <span th:text="${#dates.format(ent.createDate,'yyyy-MM-dd HH:mm')}">
                     </span>•
                     <span>
                         <a th:text="${ent.comments}"></a>
@@ -42,8 +43,8 @@
                         <a th:text="${ent.readCount}"></a>
                     </span>次浏览
                    </span>
-                </div>
             </div>
+        </div>
         </div>
         <div class="col-lg-3 col-md-12 col-sm-12">
         </div>

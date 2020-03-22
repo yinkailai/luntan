@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.coderyin.luntan.mapper.CommentsMapper">
+  <resultMap id="BaseResultMap" type="com.coderyin.luntan.model.Comments">
+    <id column="ID" jdbcType="BIGINT" property="id" />
+    <result column="QUESTION" jdbcType="INTEGER" property="question" />
+    <result column="CONTENT" jdbcType="VARCHAR" property="content" />
+    <result column="PARENT" jdbcType="BIGINT" property="parent" />
+    <result column="CREATOR" jdbcType="INTEGER" property="creator" />
+    <result column="CREAT_DATE" jdbcType="BIGINT" property="creatDate" />
+    <result column="UPDATE_DATE" jdbcType="BIGINT" property="updateDate" />
+    <result column="GOOD_COUNT" jdbcType="BIGINT" property="goodCount" />
+    <result column="BAD_COUNT" jdbcType="BIGINT" property="badCount" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ID, QUESTION, CONTENT, PARENT, CREATOR, CREAT_DATE, UPDATE_DATE, GOOD_COUNT, BAD_COUNT
+  </sql>
+  <select id="selectByExample" parameterType="com.coderyin.luntan.model.CommentsExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from COMMENTS
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from COMMENTS
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from COMMENTS
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.coderyin.luntan.model.CommentsExample">
+    delete from COMMENTS
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.coderyin.luntan.model.Comments">
+    insert into COMMENTS (ID, QUESTION, CONTENT,
+      PARENT, CREATOR, CREAT_DATE, 
+      UPDATE_DATE, GOOD_COUNT, BAD_COUNT
+      )
+    values (#{id,jdbcType=BIGINT}, #{question,jdbcType=INTEGER}, #{content,jdbcType=VARCHAR},
+      #{parent,jdbcType=BIGINT}, #{creator,jdbcType=INTEGER}, #{creatDate,jdbcType=BIGINT}, 
+      #{updateDate,jdbcType=BIGINT}, #{goodCount,jdbcType=BIGINT}, #{badCount,jdbcType=BIGINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.coderyin.luntan.model.Comments">
+    insert into COMMENTS
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="question != null">
+        QUESTION,
+      </if>
+      <if test="content != null">
+        CONTENT,
+      </if>
+      <if test="parent != null">
+        PARENT,
+      </if>
+      <if test="creator != null">
+        CREATOR,
+      </if>
+      <if test="creatDate != null">
+        CREAT_DATE,
+      </if>
+      <if test="updateDate != null">
+        UPDATE_DATE,
+      </if>
+      <if test="goodCount != null">
+        GOOD_COUNT,
+      </if>
+      <if test="badCount != null">
+        BAD_COUNT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="question != null">
+        #{question,jdbcType=INTEGER},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="parent != null">
+        #{parent,jdbcType=BIGINT},
+      </if>
+      <if test="creator != null">
+        #{creator,jdbcType=INTEGER},
+      </if>
+      <if test="creatDate != null">
+        #{creatDate,jdbcType=BIGINT},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=BIGINT},
+      </if>
+      <if test="goodCount != null">
+        #{goodCount,jdbcType=BIGINT},
+      </if>
+      <if test="badCount != null">
+        #{badCount,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.coderyin.luntan.model.CommentsExample" resultType="java.lang.Long">
+    select count(*) from COMMENTS
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update COMMENTS
+    <set>
+      <if test="record.id != null">
+        ID = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.question != null">
+        QUESTION = #{record.question,jdbcType=INTEGER},
+      </if>
+      <if test="record.content != null">
+        CONTENT = #{record.content,jdbcType=VARCHAR},
+      </if>
+      <if test="record.parent != null">
+        PARENT = #{record.parent,jdbcType=BIGINT},
+      </if>
+      <if test="record.creator != null">
+        CREATOR = #{record.creator,jdbcType=INTEGER},
+      </if>
+      <if test="record.creatDate != null">
+        CREAT_DATE = #{record.creatDate,jdbcType=BIGINT},
+      </if>
+      <if test="record.updateDate != null">
+        UPDATE_DATE = #{record.updateDate,jdbcType=BIGINT},
+      </if>
+      <if test="record.goodCount != null">
+        GOOD_COUNT = #{record.goodCount,jdbcType=BIGINT},
+      </if>
+      <if test="record.badCount != null">
+        BAD_COUNT = #{record.badCount,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update COMMENTS
+    set ID = #{record.id,jdbcType=BIGINT},
+      QUESTION = #{record.question,jdbcType=INTEGER},
+      CONTENT = #{record.content,jdbcType=VARCHAR},
+      PARENT = #{record.parent,jdbcType=BIGINT},
+      CREATOR = #{record.creator,jdbcType=INTEGER},
+      CREAT_DATE = #{record.creatDate,jdbcType=BIGINT},
+      UPDATE_DATE = #{record.updateDate,jdbcType=BIGINT},
+      GOOD_COUNT = #{record.goodCount,jdbcType=BIGINT},
+      BAD_COUNT = #{record.badCount,jdbcType=BIGINT}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.coderyin.luntan.model.Comments">
+    update COMMENTS
+    <set>
+      <if test="question != null">
+        QUESTION = #{question,jdbcType=INTEGER},
+      </if>
+      <if test="content != null">
+        CONTENT = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="parent != null">
+        PARENT = #{parent,jdbcType=BIGINT},
+      </if>
+      <if test="creator != null">
+        CREATOR = #{creator,jdbcType=INTEGER},
+      </if>
+      <if test="creatDate != null">
+        CREAT_DATE = #{creatDate,jdbcType=BIGINT},
+      </if>
+      <if test="updateDate != null">
+        UPDATE_DATE = #{updateDate,jdbcType=BIGINT},
+      </if>
+      <if test="goodCount != null">
+        GOOD_COUNT = #{goodCount,jdbcType=BIGINT},
+      </if>
+      <if test="badCount != null">
+        BAD_COUNT = #{badCount,jdbcType=BIGINT},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.coderyin.luntan.model.Comments">
+    update COMMENTS
+    set QUESTION = #{question,jdbcType=INTEGER},
+      CONTENT = #{content,jdbcType=VARCHAR},
+      PARENT = #{parent,jdbcType=BIGINT},
+      CREATOR = #{creator,jdbcType=INTEGER},
+      CREAT_DATE = #{creatDate,jdbcType=BIGINT},
+      UPDATE_DATE = #{updateDate,jdbcType=BIGINT},
+      GOOD_COUNT = #{goodCount,jdbcType=BIGINT},
+      BAD_COUNT = #{badCount,jdbcType=BIGINT}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectByQuestionId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select * from COMMENTS
+    where 1=1
+    <if test="question!=null and question!=''">
+      and question = #{question}
+    </if>
+  </select>
+</mapper>

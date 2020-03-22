@@ -17,7 +17,7 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-lg-9 col-md-12 col-sm-12">
-            <h3><span class="glyphicon glyphicon-th-list" aria-hidden="true" th:text="${sectionName}"></span></h3>
+            <h3 class="glyphicon glyphicon-th-list" aria-hidden="true" th:text="${sectionName}"></h3>
             </hr>
 
             <div class="media" th:each="ent : ${quesList}">
@@ -30,6 +30,7 @@
                     <h4 class="media-heading" th:text="${ent.title}"></h4>
                     <span th:text="${ent.content}"></span>
                 </div>
+                <hr>
             </div>
         </div>
         <div class="col-lg-3 col-md-12 col-sm-12">

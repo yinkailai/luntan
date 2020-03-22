@@ -10,7 +10,9 @@
     <script src="/js/bootstrap.min.js"></script>
     <script>
         function commit() {
+            //回复的内容
             let content = $("#answer").val();
+            //回复问题的id
             let question = $("#questionId").val();
             alert(question);
             $.ajax({
@@ -20,6 +22,10 @@
                     content:content,
                     question:question
                 },
+                async:true,
+                success:function (data) {
+                    alert(data.message);
+                }
             })
 
         }
@@ -32,7 +38,7 @@
         <div class="col-lg-9 col-md-12 col-sm-12 clo-xs-12">
             <h3 th:text="${question.title}"></h3>
             </hr>
-
+            <!--问题详情-->
             <div class="media">
                 <div class="media-left">
                 </div>
@@ -56,10 +62,37 @@
                     <span class="glyphicon glyphicon-pencil" >编辑</span>
                 </a>
                 <hr>
+
             </div>
+            <!--回复列表-->
+            <div class="col-lg-12 col-md-12 col-sm-12 clo-xs-12">
+                <div class="media" th:each="ent : ${comments}">
+                    <div class="media-left">
+                        <a>
+                            <img class="img-circle" style="height: 40px" src="https://i0.hdslb.com/bfs/archive/4de86ebf90b044bf9ba2becf042a8977062b3f99.png">
+                        </a>
+                    </div>
+                    <div class="media-body comments" >
+                        <div clas="media-heading">
+                        <span th:text="${ent.creator}"></span>
+                        <span th:text="${ent.content}"></span>
+                        <span th:text="${#dates.format(ent.creatDate,'yyyy-MM-dd HH:mm')}"></span>
+                        </div>
+                            <!--点赞图标-->
+                        <div class="icoc">
+                        <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
+                        <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>
+                        <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
+                        </div>
+                    </div>
+                    <hr>
+                </div>
+            </div>
+
+
             <!--头像/名字-->
             <div class="media-left">
-                <img class="img-circle" style="height: 40px" src="https://i2.hdslb.com/bfs/face/393b19032f0c16fefdedcd74fbc7b6b805956dfa.jpg@40w_41h_1c_100q.webp">
+                <img class="img-circle" style="height: 40px" src="https://i0.hdslb.com/bfs/archive/4de86ebf90b044bf9ba2becf042a8977062b3f99.png">
             </div>
             <div class="media-body">
                 <span></span>
